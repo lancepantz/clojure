@@ -35,8 +35,9 @@ public static Keyword intern(Symbol sym){
 	Keyword existingk = existingRef.get();
 	if(existingk != null)
 		return existingk;
-	//entry died in the interim, do over
-	return intern(sym);
+	//entry died in the interim, add it again
+	table.put(sym, new SoftReference<Keyword>(k,rq));
+	return k;
 }
 
 public static Keyword intern(String ns, String name){
